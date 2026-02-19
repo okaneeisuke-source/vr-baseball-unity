@@ -575,8 +575,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 573610464}
   releasePoint: {fileID: 1723838609}
   target: {fileID: 2076304744}
-  throwForce: 20
-  flightTime: 0.5
+  flightTime: 0.3
 --- !u!114 &287424366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,6 +1235,7 @@ GameObject:
   - component: {fileID: 573610466}
   - component: {fileID: 573610465}
   - component: {fileID: 573610471}
+  - component: {fileID: 573610472}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -1370,6 +1370,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2076304744}
   visibleTimeAfterHit: 0
+--- !u!114 &573610472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573610464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e367333c12d9bbe46922d8ef48cab918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curveAcceleration: 8
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,7 +2633,7 @@ Transform:
   m_GameObject: {fileID: 1654490882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: 0.38268343}
-  m_LocalPosition: {x: 2.29, y: -6.825, z: 8.814999}
+  m_LocalPosition: {x: 2.29, y: -7, z: 8.814999}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3344,7 +3357,7 @@ GameObject:
   - component: {fileID: 1952644436}
   - component: {fileID: 1952644438}
   m_Layer: 0
-  m_Name: TrajectoryContoller
+  m_Name: TrajectoryController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3363,6 +3376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 573610469}
+  trajectoryVisibleTime: 3
+  straightColor: {r: 1, g: 1, b: 1, a: 1}
+  curveColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1952644437
 Transform:
   m_ObjectHideFlags: 0
@@ -3692,7 +3708,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 17.5}
-  m_LocalScale: {x: 0.5, y: 0.7, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.75, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3708,7 +3724,7 @@ GameObject:
   - component: {fileID: 2133841404}
   - component: {fileID: 2133841403}
   m_Layer: 0
-  m_Name: CanvasContoller
+  m_Name: CanvasController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3728,6 +3744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultCanvas: {fileID: 1503584437}
   delay: 1
+  visibleDuration: 2
 --- !u!4 &2133841404
 Transform:
   m_ObjectHideFlags: 0

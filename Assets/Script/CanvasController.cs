@@ -5,6 +5,7 @@ public class CanvasController : MonoBehaviour
 {
     public GameObject resultCanvas;
     public float delay = 1f;
+    public float visibleDuration = 3f; 
 
     void OnEnable()
     {
@@ -32,10 +33,17 @@ public class CanvasController : MonoBehaviour
     IEnumerator ShowCanvasAfterDelay()
     {
         yield return new WaitForSeconds(delay);
-
+        
         if (resultCanvas != null)
         {
             resultCanvas.SetActive(true);
         }
+
+         yield return new WaitForSeconds(visibleDuration);
+           if (resultCanvas != null)
+        {
+            resultCanvas.SetActive(false); // 非表示
+        }
+   
     }
 }

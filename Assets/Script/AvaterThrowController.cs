@@ -9,6 +9,7 @@ public class AvatarThrowController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger("Throw");
+            Debug.Log("Space pressed");
         }
     }
 }
