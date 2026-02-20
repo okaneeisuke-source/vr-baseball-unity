@@ -6,6 +6,7 @@ public class Pitcher : MonoBehaviour
     public Transform target; 
     public float flightTime = 0.5f; 
     private int pitchCount = 0; 
+    public CanvasController canvasController; // キャンバスコントローラーへの参照
 
     public void ThrowBall() 
     { 
@@ -15,6 +16,7 @@ public class Pitcher : MonoBehaviour
         Rigidbody rb = ball.GetComponent<Rigidbody>(); 
         Vector3 toTarget = target.position - releasePoint.position; 
         Vector3 velocity = toTarget / flightTime; 
+        canvasController.ShowCanvas(pitchCount);
         TrajectoryController tc = FindObjectOfType<TrajectoryController>();
                 if (tc != null)
                 {
@@ -30,6 +32,7 @@ public class Pitcher : MonoBehaviour
              }
         else if (pitchCount == 2) 
         { 
+            // カーブ
             velocity.y += 2.2f * Mathf.Abs(Physics.gravity.y) * flightTime; 
             velocity *= 0.45f;
             rb.velocity = velocity;
