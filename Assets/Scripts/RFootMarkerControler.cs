@@ -1,30 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RFootMarkerControler : MonoBehaviour
 {
-  [SerializeField] private GameObject Target;
-  public bool isTargeted = false;
-  // Start is called before the first frame update
-  void Start()
-  {
-      isTargeted = false;
-  }
+    [SerializeField] private GameObject Target;
 
-  // Update is called once per frame
-  void Update()
-  {
+    public bool isTargeted = false;
 
-  }
-  private void OnTriggerEnter(Collider other)
-  {
-    // 触れた瞬間だけ true にする
-    if (other.gameObject == Target)
+    private TargetFeedbackController targetFeedbackController;
+
+    private void Start()
     {
-      isTargeted = true;
-      Debug.Log("Right Foot Targeted");
+        isTargeted = false;
 
+        if (Target != null)
+        {
+            targetFeedbackController =
+                Target.GetComponent<TargetFeedbackController>();
+        }
     }
-  }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject != Target)
+        {
+            return;
+        }
+
+        // 同じ進入で複数回評価することを防ぐ
+        if (isTargeted)
+        {
+            return;
+        }
+
+        isTargeted = true;
+
+        Debug.Log("Right Foot Targeted");
+
+        if (targetFeedbackController != null)
+        {
+            targetFeedbackController.EvaluateFootPosition(
+                transform.position
+            );
+        }
+        else
+        {
+            Debug.LogWarning(
+                "TargetFeedbackControllerがTargetに設定されていません。"
+            );
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == Target)
+        {
+            isTargeted = false;
+        }
+    }
 }
