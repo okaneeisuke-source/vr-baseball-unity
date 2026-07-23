@@ -12,6 +12,9 @@ public class ExperimentRecorder : MonoBehaviour
     public bool isRecording;
     public List<ExperimentData> experimentData = new List<ExperimentData>();
     private int sampleID;
+
+    [SerializeField] private ResultContoller resultContoller;
+
     public struct ExperimentData
     {
         // 現状のデータが何試行目であるか
@@ -201,6 +204,11 @@ public class ExperimentRecorder : MonoBehaviour
     public void StopRecording()
     {
         isRecording = false;
+        
+        if (resultContoller != null)
+        {
+             resultContoller.AddLatestTrialResult();
+        }
         OnSave();
     }
     
