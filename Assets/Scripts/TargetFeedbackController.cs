@@ -4,10 +4,13 @@ public class TargetFeedbackController : MonoBehaviour
 {
     [Header("Evaluation Settings")]
     [SerializeField, Range(0f, 1f)]
-    private float goodThreshold = 0.2f;
+    private float goodThreshold = 0.1f;
 
     [SerializeField, Range(0f, 1f)]
-    private float normalThreshold = 0.4f;
+    private float normalThreshold = 0.3f;
+
+    [SerializeField]
+    private FeedbackManager feedbackManager;
 
     public void EvaluateFootPosition(Vector3 footWorldPosition)
     {
@@ -28,32 +31,43 @@ public class TargetFeedbackController : MonoBehaviour
         float normalizedDistance =
             distanceFromCenter / targetRadius;
 
-        string feedback;
+       string feedback;
 
         if (normalizedDistance <= goodThreshold)
         {
             feedback = "とても良い";
+
+            if (feedbackManager != null)
+            {
+                feedbackManager.PlayExcellentVibration();
+            }
         }
         else if (normalizedDistance <= normalThreshold)
         {
             feedback = "良い";
+
+            if (feedbackManager != null)
+            {
+                feedbackManager.PlayGoodVibration();
+            }
         }
         else if (normalizedDistance <= 1f)
         {
             feedback = "中心から遠い";
+
+            if (feedbackManager != null)
+            {
+                feedbackManager.PlayFarVibration();
+            }
         }
         else
         {
             feedback = "ターゲットの外";
-        }
 
-        Debug.Log(
-            $"[Target判定] " +
-            $"足World座標={footWorldPosition}, " +
-            $"足Local座標={localFootPosition}, " +
-            $"中心距離={distanceFromCenter:F3}, " +
-            $"正規化距離={normalizedDistance:F3}, " +
-            $"評価={feedback}"
-        );
+            if (feedbackManager != null)
+            {
+                feedbackManager.PlayOutsideVibration();
+            }
+        }
     }
 }

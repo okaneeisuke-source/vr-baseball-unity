@@ -65,7 +65,7 @@ public class HeightChangeController : MonoBehaviour
                 // WorldControllerの座標変化を基準として相対座標を計算
                 float adjustedY = newY + worldController.totalYChange;
                 BarHeight = newY;
-                // barRight
+              /*  // barRight
                 Vector3 posR = barRight.transform.position;
                 posR.y = adjustedY;
                 barRight.transform.position = posR;
@@ -75,7 +75,7 @@ public class HeightChangeController : MonoBehaviour
                 posL.y = adjustedY;
                 barLeft.transform.position = posL;
 
-                // targetbar
+              */  // targetbar
                 Vector3 posT = targetbar.transform.position;
                 posT.y = adjustedY;
                 targetbar.transform.position = posT;
